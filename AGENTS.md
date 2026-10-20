@@ -42,5 +42,6 @@ Before a development task, read this file, `docs/learning-workflow.md`, `docs/ar
 - A scaffold's checks should pass for its stated contract. List unfinished feature criteria explicitly; do not hide failures or present placeholder output as completion.
 - After each implementation or scaffold delivery, make a Conventional Commit and run `git push`. This includes documentation changes. Stage only task-owned files.
 - Use truthful messages, for example `chore(learning): scaffold progress exercise` or `docs: document scaffold-first learning`. Do not describe a scaffold as a completed feature.
+- When creating a pull request, immediately request review from the other developer: Fera's work is reviewed by DIMUZ, and DIMUZ's work is reviewed by Fera. Resolve and verify the reviewer's GitHub account before requesting review; do not guess the username or request self-review. If the account cannot be identified or GitHub rejects the request, report it explicitly in the handoff.
 - Read-only mentoring/review needs no commit. Do not amend, force-push, or discard changes to bypass a push problem. Report blocked commit/push accurately.
 - Handoff: what is prepared, what the human must implement, exact TODO locations, verification steps, checks actually run, and commit/push status. Stop after delivering a scaffold; do not continue into the human-owned implementation.
