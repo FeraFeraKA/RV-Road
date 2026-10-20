@@ -5,6 +5,7 @@
 - Prefer Composition API and `<script setup lang="ts">`.
 - Type component props and emits. Follow the existing `modelValue` / `update:modelValue` pattern when appropriate.
 - Keep route parsing and screen composition in pages; reusable views in components; reusable behavior in composables/stores.
+- Let Nuxt i18n generate locale prefixes; do not add a manual `[locale]` directory. Use `useLocalePath` for internal links and `useSwitchLocalePath` for language links. Put interface translations in `i18n/locales/` and consume them with `t()`.
 - Use computed values for derivation and watchers for actual side effects. Avoid redundant copies of derived state.
 - Keep exercises simple enough to explain. Do not add abstractions just to demonstrate another API.
 - Access DOM, storage, and browser-only graph APIs only in client-safe code. Clean up listeners/subscriptions.
@@ -32,7 +33,7 @@ Read `package.json` first. Current scripts: `build`, `dev`, `generate`, `preview
 
 ## Git and documentation
 
-- When creating a branch for agent work, use `codex/`; do not switch another developer's branch without a reason.
+- Use a separate `task/<task-id>-<short-name>` branch for each task. Keep follow-up fixes for that task on the same branch; do not switch another developer's branch without a reason.
 - Stage only task-owned files and preserve unrelated changes.
 - Make a Conventional Commit and push after implementation, including scaffold/documentation delivery. Report problems; do not force-push or silently rewrite history.
 - Documentation, learning briefs, and instructional TODOs are English. Human conversation may be Russian.

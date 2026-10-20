@@ -2,7 +2,7 @@
 
 ## Current implementation
 
-The application uses Nuxt 4, Vue 3, TypeScript, and Vue Flow. Pinia, a Markdown rendering pipeline, a backend, and authentication are not implemented.
+The application uses Nuxt 4, Vue 3, TypeScript, Vue Flow, and `@nuxtjs/i18n`. Pinia, a Markdown rendering pipeline, a backend, and authentication are not implemented.
 
 ```text
 app/
@@ -21,6 +21,7 @@ app/
 `-- assets/css/
     `-- tokens.css             # Tokens and global Vue Flow styles
 public/                        # Static assets
+i18n/locales/                  # RU/EN interface dictionaries
 nuxt.config.ts                 # Configuration and CSS entry point
 package.json                   # Dependencies and executable commands
 ```
@@ -33,7 +34,7 @@ Create these boundaries incrementally when needed; this is not an instruction to
 
 ```text
 app/
-|-- pages/[locale]/            # Home and nested path/section/topic routes
+|-- pages/                     # Home and nested routes; i18n adds locale prefixes
 |-- layouts/                  # Shared application shell
 |-- components/
 |   |-- ui/                   # Generic controls
@@ -72,3 +73,7 @@ Graph selection, viewport, and view preference are presentation state, separate 
 ## Maintenance
 
 Update the map when responsibilities move or a proposed layer becomes implemented. Do not inventory every small component. Record significant accepted choices in `decisions.md`.
+
+## Locale routing
+
+Nuxt i18n generates `/ru` and `/en` routes with the `prefix` strategy. `/` redirects to `/ru`; browser/cookie language detection is disabled so URL locale is authoritative. The demo interface, metadata, internal navigation, and language link use the module. `app.vue` sets the document language. Demo plan names, statuses, and update labels remain Russian fixtures. Learning models and lesson content are outside this integration.
