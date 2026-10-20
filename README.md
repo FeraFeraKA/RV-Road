@@ -1,50 +1,55 @@
 # Roadmap
 
-Стартовый проект на Nuxt 4, Vue 3 и TypeScript.
+A Nuxt 4, Vue 3, and TypeScript application for React/Vue learning roadmaps. Two developers practice Vue through real features while AI prepares exercises and reviews their work.
 
-## Запуск
+## Getting started
 
-```bash
-npm install
-npm run dev
+Use the pnpm version declared in `package.json` (currently 10.32.1).
+
+```sh
+pnpm install
+pnpm dev
 ```
 
-Откройте `http://localhost:3000`.
+Open `http://localhost:3000`.
 
-## Команды
+| Command             | Purpose                                                          |
+| ------------------- | ---------------------------------------------------------------- |
+| `pnpm build`        | Build for production.                                            |
+| `pnpm preview`      | Preview a production build locally.                              |
+| `pnpm generate`     | Generate a static site.                                          |
+| `pnpm format:check` | Check repository formatting.                                     |
+| `pnpm format`       | Rewrite formatting; avoid running over others' uncommitted work. |
 
-- `npm run dev` — локальная разработка.
-- `npm run build` — production-сборка.
-- `npm run preview` — просмотр production-сборки.
-- `npm run generate` — генерация статического сайта.
+There is currently no dedicated test, lint, or typecheck script.
 
-Страницы находятся в `app/pages`, общие компоненты — в `app/components`, стили — в `app/assets/css`.
+## Documentation and AI collaboration
 
-## UI-компоненты
+- [AGENTS.md](AGENTS.md): shared agent instructions and learning boundaries.
+- [Learning workflow](docs/learning-workflow.md): scaffolding, independent implementation, hints, review, and the exercise brief template.
+- [Architecture](docs/architecture.md): existing code, proposed folders, and data flow.
+- [Product](docs/product.md): intended routes and first-release scope.
+- [Conventions](docs/conventions.md): Vue, styling, state, verification, and Git.
+- [Decisions](docs/decisions.md): accepted choices and rationale.
 
-Базовые компоненты находятся в `app/components/ui` и автоматически доступны в Nuxt:
+By default, the agent prepares a runnable task scaffold and leaves a meaningful behavior for you to implement. Explicitly request full implementation when desired. A prepared scaffold is not a finished feature. Existing Trello tasks remain provisional planning inputs.
+
+The current application is a demo plan list and UI kit. Learning routes, materials, progress, translations, and Pinia integration are planned, not implemented.
+
+## UI kit
+
+Components in `app/components/ui` are automatically available through Nuxt:
 
 - `UiButton`, `UiBox`, `UiInput`, `UiBadge`, `UiCheckbox`, `UiNavItem`.
-- `UiLine` — кастомное ребро VueFlow с кривой Безье, вариантами `accent`/`muted` и анимацией.
+- `UiLine`: a custom Vue Flow Bezier edge with `accent`/`muted` tones and optional animation.
 
-Цвет акцента задаётся атрибутом `data-framework`: `vue` — зелёный, `react` — синий. Текущий интерфейс использует тему Vue. Базовые стили VueFlow уже подключены глобально.
-
-Размеры UI-кита заданы токенами в `app/assets/css/tokens.css`. Базовая единица `--ui-unit: calc(1rem / 16)` позволяет задавать размеры целыми числами и сохраняет масштабирование относительно корневого шрифта. Размер шрифта `html` не переопределяется.
-
-- Отступы: `--space-2xs`, `--space-xs`, `--space-sm`, `--space-md`, `--space-lg`, `--space-xl` — 2, 4, 8, 12, 16, 24 единицы.
-- Шрифты: `--font-size-xs`, `--font-size-sm`, `--font-size-md`, `--font-size-lg` — 12, 13, 14, 16 единиц.
-- Высота контролов: `--control-height-sm`, `--control-height-md`, `--control-height-lg` — 32, 40, 48 единиц.
-- Скругления: `--radius-sm`, `--radius-md`, `--radius-control`, `--radius-card` — 4, 6, 8, 10 единиц. Бейджи используют небольшое скругление без искусственного радиуса для капсулы.
-
-Типографика дополнительно умножается на `--text-scale: 1.5`: например, базовые 12/14/16 единиц отображаются как 18/21/24 при стандартном корневом шрифте. Текст страницы также использует эти токены. Масштаб текста меняется отдельно от отступов и размеров иконок.
-
-Компоненты используют готовые токены, например `padding: var(--space-sm) var(--space-md)`. Новые размеры добавляйте в общую шкалу по необходимости. Толщина границ, контура фокуса и SVG-линий задана в пикселях для чёткости; breakpoint навигации остаётся в пикселях относительно ширины окна.
+Use `data-framework="vue"` for green accents and `data-framework="react"` for blue accents. Vue Flow base styles are imported globally.
 
 ```vue
-<UiCheckbox v-model="enabled">Включено</UiCheckbox>
+<UiCheckbox v-model="enabled">Enabled</UiCheckbox>
 ```
 
-Для ребра VueFlow зарегистрируйте `UiLine` как edge type:
+Register `UiLine` as a custom edge type:
 
 ```vue
 <script setup lang="ts">
@@ -59,3 +64,18 @@ const edges = [{ id: 'edge-1-2', source: '1', target: '2', type: 'roadmap' }];
   <VueFlow :edges="edges" :edge-types="edgeTypes" />
 </template>
 ```
+
+This illustrates edge registration; the caller still supplies the graph's nodes.
+
+## Design tokens
+
+Shared tokens live in `app/assets/css/tokens.css`. One unit is `--ui-unit: calc(1rem / 16)`, preserving root-font scaling without overriding the HTML font size.
+
+- Spacing: `--space-2xs`, `--space-xs`, `--space-sm`, `--space-md`, `--space-lg`, `--space-xl` are 2, 4, 8, 12, 16, and 24 units.
+- Fonts: `--font-size-xs`, `--font-size-sm`, `--font-size-md`, `--font-size-lg` start at 12, 13, 14, and 16 units.
+- Control heights: `--control-height-sm`, `--control-height-md`, `--control-height-lg` are 32, 40, and 48 units.
+- Radii: `--radius-sm`, `--radius-md`, `--radius-control`, `--radius-card` are 4, 6, 8, and 10 units. Badges use a small radius rather than a pill shape.
+
+Typography also uses `--text-scale: 1.5`: base sizes 12, 14, and 16 render as 18, 21, and 24 at the standard root font size. Text scales separately from spacing and icons.
+
+Reuse tokens such as `padding: var(--space-sm) var(--space-md)` and extend the shared scale when needed. Borders, focus outlines, SVG stroke widths, and navigation breakpoints use pixels.
