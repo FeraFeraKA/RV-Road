@@ -18,6 +18,8 @@ Trello is a provisional delivery plan. This document describes intended behavior
 
 Locales are `ru`/`en`; frameworks are `react`/`vue`. Technical slugs are shared across languages. Unknown entity/locale combinations show 404. Language switching retains the current location; framework switching opens that path's overview.
 
+Nuxt i18n owns locale prefixes; the route table describes public URLs, not a manual `[locale]` page directory. Only the localized demo home is currently wired; learning routes remain planned.
+
 ## Planned first release
 
 - Begin with web fundamentals before framework-specific topics.

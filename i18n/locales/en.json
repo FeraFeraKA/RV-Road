@@ -1,0 +1,25 @@
+{
+  "demo": {
+    "metaTitle": "Roadmaps — Roadmap",
+    "metaDescription": "Plan stages, connect tasks, and track progress.",
+    "workspace": "WORKSPACE / LOCAL",
+    "navigation": "Main navigation",
+    "roadmaps": "Roadmaps",
+    "newPlan": "New plan",
+    "active": "SYSTEM ACTIVE",
+    "create": "CREATE",
+    "eyebrow": "ORCHESTRATION / ROADMAPS",
+    "title": "Plans and roadmaps",
+    "subtitle": "Define stages, connect tasks, and track progress.",
+    "newRoadmap": "NEW ROADMAP",
+    "searchPlaceholder": "Search plans...",
+    "search": "Search plans",
+    "mine": "MY PLANS",
+    "filter": "FILTER",
+    "total": "TOTAL",
+    "jobs": "TASKS",
+    "stages": "STAGES",
+    "emptyTitle": "No plans found",
+    "emptyDescription": "Change your search or filter."
+  }
+}

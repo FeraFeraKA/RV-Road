@@ -2,6 +2,12 @@
 
 Record accepted choices and reasons. Proposed APIs/tooling remain proposals until agreed. Add a dated entry when a decision changes.
 
+## 2026-10-21: Nuxt i18n for interface and routing
+
+Use `@nuxtjs/i18n` with the `prefix` strategy for RU/EN interface messages and localized links. The URL selects the language; `/` redirects to `/ru` without browser/cookie detection. Nuxt i18n generates the locale prefix instead of a manual `[locale]` directory.
+
+Reason: reuse route generation and translation tools while preserving the agreed URL structure. This setup does not implement learning data contracts, the planned learning routes, or lesson storage.
+
 ## 2026-10-20: Scaffold-first learning
 
 Default agent output for development tasks is a runnable scaffold and brief; humans implement the selected behavior. Hints/review precede complete solutions unless explicitly delegated. Both developers need independent practice.

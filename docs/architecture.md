@@ -2,11 +2,11 @@
 
 ## Current implementation
 
-The application uses Nuxt 4, Vue 3, TypeScript, and Vue Flow. Pinia, a Markdown rendering pipeline, a backend, and authentication are not implemented.
+The application uses Nuxt 4, Vue 3, TypeScript, Vue Flow, and `@nuxtjs/i18n`. Pinia, a Markdown rendering pipeline, a backend, and authentication are not implemented.
 
 ```text
 app/
-|-- app.vue                     # Route announcer and NuxtPage
+|-- app.vue                     # Document language, route announcer and NuxtPage
 |-- pages/
 |   `-- index.vue               # Demo project-plan list, not the learning roadmap
 |-- components/
@@ -21,11 +21,14 @@ app/
 `-- assets/css/
     `-- tokens.css             # Tokens and global Vue Flow styles
 public/                        # Static assets
+i18n/locales/                  # RU/EN interface dictionaries
 nuxt.config.ts                 # Configuration and CSS entry point
 package.json                   # Dependencies and executable commands
 ```
 
 The map describes responsibilities, not temporary build files. Inspect the repository for its latest state; do not restore unrelated deleted files to match documentation.
+
+Nuxt i18n generates `/ru` and `/en` routes with the `prefix` strategy. `/` redirects to `/ru`; browser/cookie language detection is disabled so URL locale is authoritative. The demo interface, metadata, internal navigation, and language link use the module. Demo plan names, statuses, and update labels remain Russian fixtures. Learning models and lesson content are outside this integration.
 
 ## Proposed structure
 
@@ -33,7 +36,7 @@ Create these boundaries incrementally when needed; this is not an instruction to
 
 ```text
 app/
-|-- pages/[locale]/            # Home and nested path/section/topic routes
+|-- pages/                     # Home and nested routes; i18n adds locale prefixes
 |-- layouts/                  # Shared application shell
 |-- components/
 |   |-- ui/                   # Generic controls

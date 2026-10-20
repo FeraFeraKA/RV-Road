@@ -1,9 +1,13 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 
+const { t, locale } = useI18n();
+const localePath = useLocalePath();
+const switchLocalePath = useSwitchLocalePath();
+
 useSeoMeta({
-  title: 'Дорожные карты — Roadmap',
-  description: 'Планируйте этапы, связывайте задачи и следите за прогрессом.',
+  title: () => t('demo.metaTitle'),
+  description: () => t('demo.metaDescription'),
 });
 
 const query = ref('');
@@ -70,34 +74,45 @@ const visiblePlans = computed(() => {
         <span :class="$style.brandName">ROADMAP</span>
       </div>
 
-      <p :class="$style.sideLabel">РАБОЧАЯ ОБЛАСТЬ / ЛОКАЛЬНО</p>
-      <nav :class="$style.nav" aria-label="Основная навигация">
-        <UiNavItem to="/" :active="true"><template #icon>⌘</template>Дорожные карты</UiNavItem>
-        <UiNavItem to="/#tasks"><template #icon>＋</template>Новый план</UiNavItem>
+      <p :class="$style.sideLabel">{{ t('demo.workspace') }}</p>
+      <nav :class="$style.nav" :aria-label="t('demo.navigation')">
+        <UiNavItem :to="localePath('index')" :active="true"
+          ><template #icon>⌘</template>{{ t('demo.roadmaps') }}</UiNavItem
+        >
+        <UiNavItem :to="`${localePath('index')}#tasks`"
+          ><template #icon>＋</template>{{ t('demo.newPlan') }}</UiNavItem
+        >
       </nav>
 
       <div :class="$style.sideStatus">
-        <span :class="$style.connected"><span /> СИСТЕМА АКТИВНА</span>
+        <span :class="$style.connected"><span /> {{ t('demo.active') }}</span>
         <span :class="$style.environment">ENV / DEVELOPMENT</span>
       </div>
     </aside>
 
     <div :class="$style.mainColumn">
       <header :class="$style.topbar">
-        <div :class="$style.topStatus"><span /> СИСТЕМА АКТИВНА</div>
-        <UiButton size="sm"><span aria-hidden="true">＋</span> СОЗДАТЬ</UiButton>
+        <div :class="$style.topStatus"><span /> {{ t('demo.active') }}</div>
+        <NuxtLink
+          :to="switchLocalePath(locale === 'ru' ? 'en' : 'ru')"
+          :class="$style.languageLink"
+          :lang="locale === 'ru' ? 'en' : 'ru'"
+        >
+          {{ locale === 'ru' ? 'English' : 'Русский' }}
+        </NuxtLink>
+        <UiButton size="sm"><span aria-hidden="true">＋</span> {{ t('demo.create') }}</UiButton>
       </header>
 
       <main :class="$style.content">
         <div :class="$style.headingRow">
           <div>
-            <p :class="$style.eyebrow">ОРКЕСТРАЦИЯ / ROADMAPS</p>
-            <h1>Планы и дорожные карты</h1>
+            <p :class="$style.eyebrow">{{ t('demo.eyebrow') }}</p>
+            <h1>{{ t('demo.title') }}</h1>
             <p :class="$style.subtitle">
-              Определяйте этапы, связывайте задачи и наблюдайте за прогрессом.
+              {{ t('demo.subtitle') }}
             </p>
           </div>
-          <UiButton><span aria-hidden="true">＋</span> НОВАЯ ДОРОЖНАЯ КАРТА</UiButton>
+          <UiButton><span aria-hidden="true">＋</span> {{ t('demo.newRoadmap') }}</UiButton>
         </div>
 
         <div :class="$style.toolbar">
@@ -106,18 +121,18 @@ const visiblePlans = computed(() => {
             <UiInput
               v-model="query"
               size="sm"
-              placeholder="Поиск планов..."
-              aria-label="Поиск планов"
+              :placeholder="t('demo.searchPlaceholder')"
+              :aria-label="t('demo.search')"
             />
             <kbd>/</kbd>
           </label>
-          <UiCheckbox v-model="mineOnly">МОИ ПЛАНЫ</UiCheckbox>
-          <UiButton variant="secondary" size="sm">☷ ФИЛЬТР</UiButton>
+          <UiCheckbox v-model="mineOnly">{{ t('demo.mine') }}</UiCheckbox>
+          <UiButton variant="secondary" size="sm">☷ {{ t('demo.filter') }}</UiButton>
         </div>
 
         <div :class="$style.sectionHeader">
-          <h2>Дорожные карты</h2>
-          <span>{{ visiblePlans.length }} ВСЕГО</span>
+          <h2>{{ t('demo.roadmaps') }}</h2>
+          <span>{{ visiblePlans.length }} {{ t('demo.total') }}</span>
         </div>
 
         <div v-if="visiblePlans.length" :class="$style.grid">
@@ -130,15 +145,15 @@ const visiblePlans = computed(() => {
             <h3>{{ plan.name }}</h3>
             <p :class="$style.planId">ID / {{ plan.id }}</p>
             <div :class="$style.cardMeta">
-              <span><span aria-hidden="true">▱</span> {{ plan.jobs }} ЗАДАЧ</span>
-              <span><span aria-hidden="true">⌘</span> {{ plan.roots }} ЭТАПА</span>
+              <span><span aria-hidden="true">▱</span> {{ plan.jobs }} {{ t('demo.jobs') }}</span>
+              <span><span aria-hidden="true">⌘</span> {{ plan.roots }} {{ t('demo.stages') }}</span>
               <span><span aria-hidden="true">◷</span> {{ plan.updated }}</span>
             </div>
           </UiBox>
         </div>
         <UiBox v-else :class="$style.empty" padding="lg">
-          <h3>Планы не найдены</h3>
-          <p>Измените поисковый запрос или фильтр.</p>
+          <h3>{{ t('demo.emptyTitle') }}</h3>
+          <p>{{ t('demo.emptyDescription') }}</p>
         </UiBox>
       </main>
     </div>
@@ -146,6 +161,14 @@ const visiblePlans = computed(() => {
 </template>
 
 <style module>
+.languageLink {
+  color: var(--color-accent);
+  font-size: var(--font-size-xs);
+}
+.languageLink:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
 .shell {
   position: relative;
   display: flex;
