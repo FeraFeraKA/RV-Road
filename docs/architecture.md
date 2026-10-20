@@ -28,8 +28,6 @@ package.json                   # Dependencies and executable commands
 
 The map describes responsibilities, not temporary build files. Inspect the repository for its latest state; do not restore unrelated deleted files to match documentation.
 
-The first domain-contract exercise is prepared in `docs/exercises/01-learning-models.md`. Its module exports no domain types yet and is not consumed by the demo.
-
 ## Proposed structure
 
 Create these boundaries incrementally when needed; this is not an instruction to generate every folder now.
