@@ -7,6 +7,7 @@ The application uses Nuxt 4, Vue 3, TypeScript, and Vue Flow. Pinia, a Markdown 
 ```text
 app/
 |-- app.vue                     # Route announcer and NuxtPage
+|-- types/roadmap.ts            # Empty learning entry point; domain models not implemented
 |-- pages/
 |   `-- index.vue               # Demo project-plan list, not the learning roadmap
 |-- components/
@@ -26,6 +27,8 @@ package.json                   # Dependencies and executable commands
 ```
 
 The map describes responsibilities, not temporary build files. Inspect the repository for its latest state; do not restore unrelated deleted files to match documentation.
+
+The first domain-contract exercise is prepared in `docs/exercises/01-learning-models.md`. Its module exports no domain types yet and is not consumed by the demo.
 
 ## Proposed structure
 
