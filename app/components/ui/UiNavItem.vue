@@ -21,12 +21,12 @@ withDefaults(
 .item {
   display: flex;
   align-items: center;
-  gap: 0.625rem;
-  min-height: 2.25rem;
-  padding: 0 0.625rem;
-  border-radius: 0.375rem;
+  gap: var(--space-sm);
+  min-height: var(--nav-item-height);
+  padding: 0 var(--space-md);
+  border-radius: var(--radius-md);
   color: var(--color-muted);
-  font-size: 0.8125rem;
+  font-size: var(--font-size-sm);
   text-decoration: none;
   transition:
     color 120ms ease,
@@ -45,8 +45,8 @@ withDefaults(
 
 .icon {
   display: grid;
-  width: 1rem;
-  height: 1rem;
+  width: var(--icon-size);
+  height: var(--icon-size);
   place-items: center;
   color: var(--color-muted);
 }

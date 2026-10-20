@@ -17,14 +17,14 @@ withDefaults(
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.375rem;
-  min-height: 1.375rem;
-  padding: 0.125rem 0.5rem;
-  border: 1px solid var(--color-border);
-  border-radius: 999px;
+  gap: var(--space-xs);
+  min-height: var(--badge-height);
+  padding: var(--space-2xs) var(--space-sm);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-sm);
   color: var(--color-muted);
   background: var(--color-surface-raised);
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs);
   font-weight: 500;
   line-height: 1;
   white-space: nowrap;

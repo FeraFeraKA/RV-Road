@@ -16,7 +16,7 @@ const path = computed(() => getBezierPath(props)[0]);
 const edgeStyle = computed(() => ({
   ...props.style,
   stroke: props.tone === 'accent' ? 'var(--color-accent)' : 'var(--color-border-strong)',
-  strokeWidth: props.selected ? 2 : 1.5,
+  strokeWidth: props.selected ? 'var(--flow-line-width-selected)' : 'var(--flow-line-width)',
 }));
 </script>
 

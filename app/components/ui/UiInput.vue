@@ -26,13 +26,15 @@ const emit = defineEmits<{
 .input {
   box-sizing: border-box;
   width: 100%;
-  min-height: 2.5rem;
-  padding: 0.5625rem 0.75rem;
-  border: 1px solid var(--color-border-strong);
-  border-radius: var(--radius-control, 0.5rem);
+  min-height: var(--control-height-md);
+  padding: var(--space-sm) var(--space-md);
+  border: var(--border-width) solid var(--color-border-strong);
+  border-radius: var(--radius-control);
   color: var(--color-text);
   background: var(--color-surface);
   font: inherit;
+  font-size: var(--font-size-md);
+  line-height: 1.25;
 }
 
 .sm {
@@ -41,7 +43,7 @@ const emit = defineEmits<{
   border: 0;
   outline: 0;
   background: transparent;
-  font-size: 0.8125rem;
+  font-size: var(--font-size-sm);
 }
 
 .sm:focus-visible {
@@ -55,8 +57,8 @@ const emit = defineEmits<{
 
 .input:focus-visible {
   border-color: var(--color-accent);
-  outline: 2px solid color-mix(in srgb, var(--color-accent) 25%, transparent);
-  outline-offset: 1px;
+  outline: var(--focus-width) solid color-mix(in srgb, var(--color-accent) 25%, transparent);
+  outline-offset: var(--focus-offset);
 }
 
 .input:disabled {

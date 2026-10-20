@@ -31,8 +31,38 @@
   --color-accent-strong: #35a372;
   --color-accent-soft: #13271e;
   --color-on-accent: #07130e;
-  --radius-control: 0.5rem;
-  --radius-card: 0.625rem;
+  /* One design unit equals 1px at the default root font size and scales with rem. */
+  --ui-unit: calc(1rem / 16);
+
+  --space-2xs: calc(var(--ui-unit) * 2);
+  --space-xs: calc(var(--ui-unit) * 4);
+  --space-sm: calc(var(--ui-unit) * 8);
+  --space-md: calc(var(--ui-unit) * 12);
+  --space-lg: calc(var(--ui-unit) * 16);
+  --space-xl: calc(var(--ui-unit) * 24);
+
+  --font-size-xs: calc(var(--ui-unit) * 12);
+  --font-size-sm: calc(var(--ui-unit) * 13);
+  --font-size-md: calc(var(--ui-unit) * 14);
+  --font-size-lg: 1rem;
+
+  --control-height-sm: calc(var(--ui-unit) * 32);
+  --control-height-md: calc(var(--ui-unit) * 40);
+  --control-height-lg: calc(var(--ui-unit) * 48);
+  --nav-item-height: calc(var(--ui-unit) * 36);
+  --badge-height: calc(var(--ui-unit) * 24);
+  --icon-size: calc(var(--ui-unit) * 16);
+
+  --radius-sm: calc(var(--ui-unit) * 4);
+  --radius-md: calc(var(--ui-unit) * 6);
+  --radius-control: calc(var(--ui-unit) * 8);
+  --radius-card: calc(var(--ui-unit) * 10);
+
+  --border-width: 1px;
+  --focus-width: 2px;
+  --focus-offset: 2px;
+  --flow-line-width: 1.5px;
+  --flow-line-width-selected: 2px;
 }
 
 [data-framework='vue'] {

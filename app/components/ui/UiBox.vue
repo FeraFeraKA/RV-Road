@@ -19,8 +19,8 @@ withDefaults(
 
 <style module>
 .box {
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card, 0.75rem);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-card);
   background: var(--color-surface);
 }
 
@@ -28,12 +28,12 @@ withDefaults(
   padding: 0;
 }
 .sm {
-  padding: 0.75rem;
+  padding: var(--space-md);
 }
 .md {
-  padding: 1rem;
+  padding: var(--space-lg);
 }
 .lg {
-  padding: 1.5rem;
+  padding: var(--space-xl);
 }
 </style>

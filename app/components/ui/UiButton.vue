@@ -26,9 +26,9 @@ withDefaults(
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  border: 1px solid transparent;
-  border-radius: var(--radius-control, 0.5rem);
+  gap: var(--space-sm);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-control);
   font: inherit;
   font-weight: 600;
   line-height: 1.25;
@@ -40,8 +40,8 @@ withDefaults(
 }
 
 .button:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
+  outline: var(--focus-width) solid var(--color-accent);
+  outline-offset: var(--focus-offset);
 }
 
 .button:disabled {
@@ -87,18 +87,18 @@ withDefaults(
 }
 
 .sm {
-  min-height: 2rem;
-  padding: 0.375rem 0.625rem;
-  font-size: 0.875rem;
+  min-height: var(--control-height-sm);
+  padding: var(--space-xs) var(--space-sm);
+  font-size: var(--font-size-md);
 }
 .md {
-  min-height: 2.5rem;
-  padding: 0.5625rem 0.875rem;
-  font-size: 0.9375rem;
+  min-height: var(--control-height-md);
+  padding: var(--space-sm) var(--space-md);
+  font-size: var(--font-size-md);
 }
 .lg {
-  min-height: 3rem;
-  padding: 0.75rem 1.125rem;
-  font-size: 1rem;
+  min-height: var(--control-height-lg);
+  padding: var(--space-md) var(--space-lg);
+  font-size: var(--font-size-lg);
 }
 </style>
