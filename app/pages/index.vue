@@ -2,119 +2,102 @@
 import { computed, ref } from 'vue';
 
 useSeoMeta({
-  title: 'Проекты — Roadmap',
-  description: 'Обзор проектов и их прогресса.',
+  title: 'Дорожные карты — Roadmap',
+  description: 'Планируйте этапы, связывайте задачи и следите за прогрессом.',
 });
 
 const query = ref('');
-const projects = [
+const mineOnly = ref(false);
+const plans = [
   {
-    name: 'Обновление сайта',
-    detail: 'Редизайн и новая главная страница',
+    name: 'Запуск продукта',
+    id: 'rm_01e9267dd8b88bc2b44cdb9216e4ddaf',
+    jobs: 8,
+    roots: 3,
+    updated: '20 окт, 10:42',
     status: 'В работе',
     tone: 'info',
-    date: 'Обновлён сегодня',
-    mark: 'O',
+    mine: true,
+  },
+  {
+    name: 'Редизайн интерфейса',
+    id: 'rm_01925b36fa99bf5e1d6a334f757924',
+    jobs: 12,
+    roots: 4,
+    updated: '19 окт, 18:10',
+    status: 'Планирование',
+    tone: 'warning',
+    mine: true,
   },
   {
     name: 'Мобильное приложение',
-    detail: 'Первый релиз для iOS и Android',
-    status: 'Планирование',
-    tone: 'warning',
-    date: 'Обновлён вчера',
-    mark: 'M',
+    id: 'rm_01d2a8c86fe3a99dc41266d5a277ab',
+    jobs: 16,
+    roots: 2,
+    updated: '18 окт, 13:24',
+    status: 'Завершено',
+    tone: 'success',
+    mine: false,
   },
   {
     name: 'Дизайн-система',
-    detail: 'Общие компоненты и визуальные правила',
-    status: 'Завершён',
-    tone: 'success',
-    date: 'Обновлён 12 окт.',
-    mark: 'D',
-  },
-  {
-    name: 'Онбординг команды',
-    detail: 'Документация и первые задачи',
+    id: 'rm_01a55d2480fca217c446b8f27711aa',
+    jobs: 6,
+    roots: 1,
+    updated: '16 окт, 09:05',
     status: 'В работе',
     tone: 'info',
-    date: 'Обновлён 10 окт.',
-    mark: 'T',
-  },
-  {
-    name: 'Интеграция аналитики',
-    detail: 'События и продуктовые метрики',
-    status: 'Планирование',
-    tone: 'warning',
-    date: 'Обновлён 8 окт.',
-    mark: 'A',
-  },
-  {
-    name: 'Публичный запуск',
-    detail: 'Подготовка к открытой бете',
-    status: 'Черновик',
-    tone: 'neutral',
-    date: 'Обновлён 4 окт.',
-    mark: 'P',
+    mine: true,
   },
 ] as const;
 
-const filteredProjects = computed(() => {
-  const value = query.value.trim().toLocaleLowerCase('ru');
-  return projects.filter((project) =>
-    `${project.name} ${project.detail}`.toLocaleLowerCase('ru').includes(value),
-  );
+const visiblePlans = computed(() => {
+  const term = query.value.trim().toLocaleLowerCase('ru');
+  return plans.filter((plan) => {
+    return (
+      (!mineOnly.value || plan.mine) &&
+      `${plan.name} ${plan.id}`.toLocaleLowerCase('ru').includes(term)
+    );
+  });
 });
 </script>
 
 <template>
-  <div :class="$style.shell">
+  <div :class="$style.shell" data-framework="vue">
     <aside :class="$style.sidebar">
-      <div :class="$style.workspace">
-        <span :class="$style.workspaceMark">R</span>
-        <span :class="$style.workspaceName">Roadmap</span>
-        <UiBadge :class="$style.teamBadge">Команда</UiBadge>
-        <span :class="$style.chevron" aria-hidden="true">⌄</span>
+      <div :class="$style.brandRow">
+        <span :class="$style.brandMark">R</span>
+        <span :class="$style.brandName">ROADMAP</span>
       </div>
 
-      <label :class="$style.find">
-        <span aria-hidden="true">⌕</span>
-        <span>Быстрый поиск</span>
-        <kbd>⌘ K</kbd>
-      </label>
-
-      <nav :class="$style.navigation" aria-label="Основная навигация">
-        <UiNavItem to="/" :active="true"><template #icon>▦</template>Проекты</UiNavItem>
-        <UiNavItem to="/#roadmaps"><template #icon>◇</template>Дорожные карты</UiNavItem>
-        <UiNavItem to="/#activity"><template #icon>◷</template>Активность</UiNavItem>
+      <p :class="$style.sideLabel">РАБОЧАЯ ОБЛАСТЬ / ЛОКАЛЬНО</p>
+      <nav :class="$style.nav" aria-label="Основная навигация">
+        <UiNavItem to="/" :active="true"><template #icon>⌘</template>Дорожные карты</UiNavItem>
+        <UiNavItem to="/#tasks"><template #icon>＋</template>Новый план</UiNavItem>
       </nav>
 
-      <div :class="$style.sidebarBottom">
-        <div :class="$style.usageLabel"><span>Использование</span><span>2 из 5 проектов</span></div>
-        <div :class="$style.progress"><span /></div>
-        <div :class="$style.profile">
-          <span :class="$style.avatar">N</span><span>Николай</span
-          ><span :class="$style.more">···</span>
-        </div>
+      <div :class="$style.sideStatus">
+        <span :class="$style.connected"><span /> СИСТЕМА АКТИВНА</span>
+        <span :class="$style.environment">ENV / DEVELOPMENT</span>
       </div>
     </aside>
 
     <div :class="$style.mainColumn">
       <header :class="$style.topbar">
-        <span :class="$style.breadcrumb">Все проекты <span aria-hidden="true">⌄</span></span>
-        <span :class="$style.topbarCenter">Обзор</span>
-        <UiButton variant="ghost" size="sm">Помощь</UiButton>
+        <div :class="$style.topStatus"><span /> СИСТЕМА АКТИВНА</div>
+        <UiButton size="sm"><span aria-hidden="true">＋</span> СОЗДАТЬ</UiButton>
       </header>
 
       <main :class="$style.content">
         <div :class="$style.headingRow">
           <div>
-            <p :class="$style.eyebrow">РАБОЧЕЕ ПРОСТРАНСТВО</p>
-            <h1>Проекты</h1>
-            <p :class="$style.subtitle">Все планы команды в одном месте.</p>
+            <p :class="$style.eyebrow">ОРКЕСТРАЦИЯ / ROADMAPS</p>
+            <h1>Планы и дорожные карты</h1>
+            <p :class="$style.subtitle">
+              Определяйте этапы, связывайте задачи и наблюдайте за прогрессом.
+            </p>
           </div>
-          <UiButton :class="$style.newButton"
-            ><span aria-hidden="true">＋</span> Новый проект</UiButton
-          >
+          <UiButton><span aria-hidden="true">＋</span> НОВАЯ ДОРОЖНАЯ КАРТА</UiButton>
         </div>
 
         <div :class="$style.toolbar">
@@ -123,60 +106,40 @@ const filteredProjects = computed(() => {
             <UiInput
               v-model="query"
               size="sm"
-              placeholder="Найти проект..."
-              aria-label="Найти проект"
+              placeholder="Поиск планов..."
+              aria-label="Поиск планов"
             />
             <kbd>/</kbd>
           </label>
-          <UiButton variant="secondary" size="md"
-            ><span aria-hidden="true">☷</span> Фильтры</UiButton
-          >
-          <UiButton variant="secondary" size="md" aria-label="Изменить вид"
-            >▦ <span :class="$style.buttonDivider" />☰</UiButton
-          >
+          <UiCheckbox v-model="mineOnly">МОИ ПЛАНЫ</UiCheckbox>
+          <UiButton variant="secondary" size="sm">☷ ФИЛЬТР</UiButton>
         </div>
 
-        <div :class="$style.sectionHeading">
-          <h2>Недавно обновлённые</h2>
-          <span>{{ filteredProjects.length }} проекта</span>
+        <div :class="$style.sectionHeader">
+          <h2>Дорожные карты</h2>
+          <span>{{ visiblePlans.length }} ВСЕГО</span>
         </div>
 
-        <div v-if="filteredProjects.length" :class="$style.projectGrid">
-          <UiBox
-            v-for="project in filteredProjects"
-            :key="project.name"
-            :class="$style.projectCard"
-            padding="md"
-          >
-            <div :class="$style.cardTop">
-              <span :class="$style.projectMark">{{ project.mark }}</span>
-              <UiBadge :tone="project.tone">{{ project.status }}</UiBadge>
+        <div v-if="visiblePlans.length" :class="$style.grid">
+          <UiBox v-for="plan in visiblePlans" :key="plan.id" :class="$style.planCard" padding="md">
+            <div :class="$style.cardHead">
+              <span :class="$style.flowIcon" aria-hidden="true">⌘</span>
+              <UiBadge :tone="plan.tone">{{ plan.status }}</UiBadge>
+              <span :class="$style.openArrow" aria-hidden="true">↗</span>
             </div>
-            <h3>{{ project.name }}</h3>
-            <p :class="$style.projectDetail">{{ project.detail }}</p>
-            <div :class="$style.cardBottom">
-              <span :class="$style.cardDate"
-                ><span aria-hidden="true">◷</span>{{ project.date }}</span
-              >
-              <button
-                :class="$style.cardMenu"
-                type="button"
-                :aria-label="`Действия: ${project.name}`"
-              >
-                ···
-              </button>
+            <h3>{{ plan.name }}</h3>
+            <p :class="$style.planId">ID / {{ plan.id }}</p>
+            <div :class="$style.cardMeta">
+              <span><span aria-hidden="true">▱</span> {{ plan.jobs }} ЗАДАЧ</span>
+              <span><span aria-hidden="true">⌘</span> {{ plan.roots }} ЭТАПА</span>
+              <span><span aria-hidden="true">◷</span> {{ plan.updated }}</span>
             </div>
           </UiBox>
         </div>
         <UiBox v-else :class="$style.empty" padding="lg">
-          <span :class="$style.emptyIcon" aria-hidden="true">⌕</span>
-          <h3>Ничего не найдено</h3>
-          <p>Попробуйте изменить запрос.</p>
+          <h3>Планы не найдены</h3>
+          <p>Измените поисковый запрос или фильтр.</p>
         </UiBox>
-
-        <footer :class="$style.footer">
-          © 2026 Roadmap <span>·</span> Собрано для ясного движения вперёд
-        </footer>
       </main>
     </div>
   </div>
@@ -184,9 +147,21 @@ const filteredProjects = computed(() => {
 
 <style module>
 .shell {
+  position: relative;
   display: flex;
   min-height: 100vh;
+  overflow: hidden;
   background: var(--color-canvas);
+}
+.shell::before {
+  position: fixed;
+  inset: 0 0 0 228px;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgb(255 255 255 / 2.5%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 2.5%) 1px, transparent 1px);
+  background-size: 40px 40px;
+  content: '';
 }
 .sidebar {
   position: fixed;
@@ -194,390 +169,323 @@ const filteredProjects = computed(() => {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  width: 240px;
-  padding: 0.75rem;
+  width: 228px;
   border-right: 1px solid var(--color-border);
-  background: #050505;
+  background: #080808;
 }
-.workspace {
+.brandRow {
   display: flex;
   align-items: center;
   gap: 0.625rem;
-  min-height: 2.75rem;
-  padding: 0 0.25rem;
+  height: 4rem;
+  padding: 0 1rem;
+  border-bottom: 1px solid var(--color-border);
 }
-.workspaceMark {
+.brandMark {
   display: grid;
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 1.5rem;
+  height: 1.5rem;
   place-items: center;
-  border-radius: 0.5rem;
-  color: #080808;
-  background: #ededed;
-  font-size: 0.875rem;
+  border-radius: 0.1875rem;
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+.brandName {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.75rem;
   font-weight: 700;
+  letter-spacing: 0.035em;
 }
-.workspaceName {
-  font-size: 0.8125rem;
-  font-weight: 600;
-}
-.teamBadge {
-  flex: 0 0 auto;
-}
-.chevron {
-  margin-left: auto;
-  color: var(--color-muted);
-}
-.find {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: 2.25rem;
-  margin: 1rem 0 1.25rem;
-  padding: 0 0.625rem;
-  border: 1px solid var(--color-border);
-  border-radius: 0.375rem;
-  color: var(--color-muted);
-  font-size: 0.8125rem;
-}
-.find kbd,
-.search kbd {
-  margin-left: auto;
-  padding: 0.125rem 0.35rem;
-  border: 1px solid var(--color-border);
-  border-radius: 0.25rem;
+.sideLabel {
+  margin: 1.25rem 1rem 0.625rem;
   color: var(--color-subtle);
-  font: inherit;
-  font-size: 0.6875rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.5625rem;
+  letter-spacing: 0.1em;
 }
-.navigation {
+.nav {
   display: grid;
   gap: 0.125rem;
+  padding: 0 0.5rem;
 }
-.sidebarBottom {
-  margin-top: auto;
-  padding: 0.75rem 0.25rem 0;
-  border-top: 1px solid var(--color-border);
-}
-.usageLabel {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.5rem;
-  margin: 0.25rem 0 0.625rem;
-  color: var(--color-muted);
-  font-size: 0.6875rem;
-}
-.usageLabel span:last-child {
-  color: var(--color-subtle);
-}
-.progress {
-  height: 0.25rem;
-  overflow: hidden;
-  border-radius: 99px;
-  background: #222;
-}
-.progress span {
-  display: block;
-  width: 40%;
-  height: 100%;
-  border-radius: inherit;
-  background: #ededed;
-}
-.profile {
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  margin-top: 1rem;
-  padding: 0.375rem 0;
-  font-size: 0.8125rem;
-}
-.avatar {
-  display: grid;
-  width: 1.75rem;
-  height: 1.75rem;
-  place-items: center;
-  border-radius: 50%;
-  color: #fff;
-  background: #343434;
+.nav :global(a) {
+  border-radius: 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.75rem;
 }
-.more {
-  margin-left: auto;
-  color: var(--color-muted);
-  font-size: 1.125rem;
+.nav :global(a[class*='active']) {
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+.sideStatus {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding: 1rem;
+  border-top: 1px solid var(--color-border);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.5625rem;
+  letter-spacing: 0.04em;
+}
+.connected {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-accent);
+}
+.connected span,
+.topStatus span {
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+.environment {
+  color: var(--color-subtle);
 }
 .mainColumn {
-  width: calc(100% - 240px);
+  width: calc(100% - 228px);
   min-height: 100vh;
-  margin-left: 240px;
+  margin-left: 228px;
 }
 .topbar {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 3.5rem;
-  padding: 0 2rem;
+  height: 4rem;
+  padding: 0 1.5rem;
   border-bottom: 1px solid var(--color-border);
-  background: rgb(0 0 0 / 88%);
-  backdrop-filter: blur(12px);
+  background: rgb(8 8 8 / 88%);
 }
-.breadcrumb {
+.topStatus {
   display: flex;
-  gap: 0.5rem;
   align-items: center;
-  font-size: 0.8125rem;
-  font-weight: 550;
-}
-.breadcrumb span {
-  color: var(--color-muted);
-}
-.topbarCenter {
-  color: var(--color-muted);
-  font-size: 0.75rem;
+  gap: 0.5rem;
+  color: var(--color-subtle);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.5625rem;
+  letter-spacing: 0.06em;
 }
 .content {
-  width: min(100%, 1320px);
+  position: relative;
+  z-index: 1;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 3rem 2rem 2rem;
+  padding: 3rem 1.75rem 2rem;
 }
 .headingRow {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.25rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
 }
 .eyebrow {
-  margin: 0 0 0.5rem;
-  color: var(--color-subtle);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.09em;
+  margin: 0 0 0.75rem;
+  color: var(--color-accent);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.12em;
 }
 .headingRow h1 {
   margin: 0;
-  font-size: 1.75rem;
-  font-weight: 600;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 500;
   letter-spacing: -0.045em;
 }
 .subtitle {
-  margin: 0.5rem 0 0;
+  max-width: 38rem;
+  margin: 0.625rem 0 0;
   color: var(--color-muted);
-  font-size: 0.875rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.75rem;
+  line-height: 1.6;
 }
 .toolbar {
   display: flex;
-  gap: 0.5rem;
-  margin-top: 2rem;
+  align-items: center;
+  gap: 1rem;
+  margin: 1.25rem 0 1.5rem;
 }
 .search {
   display: flex;
   flex: 1;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.625rem;
   min-width: 0;
   height: 2.5rem;
   padding: 0 0.75rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-control);
+  border: 1px solid var(--color-border-strong);
+  background: #090909;
   color: var(--color-muted);
-  background: var(--color-surface);
 }
-.buttonDivider {
-  align-self: stretch;
-  width: 1px;
-  margin: 0 0.125rem;
-  background: var(--color-border);
+.search kbd {
+  padding: 0.125rem 0.375rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-subtle);
+  font: inherit;
+  font-size: 0.6875rem;
 }
-.sectionHeading {
+.sectionHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 2rem 0 0.875rem;
+  margin-bottom: 0.75rem;
 }
-.sectionHeading h2 {
+.sectionHeader h2 {
   margin: 0;
-  font-size: 0.875rem;
-  font-weight: 550;
-}
-.sectionHeading > span {
-  color: var(--color-subtle);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 0.75rem;
+  font-weight: 500;
 }
-.projectGrid {
+.sectionHeader > span {
+  color: var(--color-subtle);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.5625rem;
+  letter-spacing: 0.06em;
+}
+.grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.875rem;
 }
-.projectCard {
+.planCard {
   min-width: 0;
   padding: 1rem;
+  border-radius: 0;
+  background: rgb(14 14 14 / 94%);
   transition:
     border-color 140ms ease,
     background-color 140ms ease;
 }
-.projectCard:hover {
-  border-color: var(--color-border-strong);
-  background: #0d0d0d;
+.planCard:hover {
+  border-color: var(--color-accent);
+  background: #101010;
 }
-.cardTop {
+.cardHead {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 0.5rem;
 }
-.projectMark {
+.flowIcon {
   display: grid;
   width: 2rem;
   height: 2rem;
   place-items: center;
-  border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
-  color: #d4d4d4;
-  background: #141414;
-  font-size: 0.8125rem;
-  font-weight: 600;
+  border: 1px solid var(--color-border-strong);
+  color: var(--color-accent);
+  background: #0a0a0a;
+  font-size: 1rem;
 }
-.projectCard h3 {
+.openArrow {
+  margin-left: auto;
+  color: var(--color-muted);
+}
+.planCard h3 {
   overflow: hidden;
-  margin: 1.125rem 0 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 550;
+  margin: 1.5rem 0 0.375rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8125rem;
+  font-weight: 500;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.projectDetail {
+.planId {
   overflow: hidden;
   margin: 0;
-  color: var(--color-muted);
-  font-size: 0.75rem;
+  color: var(--color-subtle);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.5625rem;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.cardBottom {
+.cardMeta {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  margin-top: 1.375rem;
+  flex-wrap: wrap;
+  gap: 0.625rem 1.25rem;
+  margin-top: 1.25rem;
   padding-top: 0.75rem;
-  border-top: 1px solid #1c1c1c;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.5625rem;
 }
-.cardDate {
+.cardMeta span {
   display: flex;
   align-items: center;
   gap: 0.375rem;
-  overflow: hidden;
-  color: var(--color-subtle);
-  font-size: 0.6875rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.cardMenu {
-  width: 1.75rem;
-  height: 1.5rem;
-  border: 0;
-  border-radius: 0.25rem;
-  color: var(--color-muted);
-  background: transparent;
-  cursor: pointer;
-}
-.cardMenu:hover {
-  color: var(--color-text);
-  background: var(--color-surface-hover);
 }
 .empty {
-  display: grid;
-  justify-items: center;
-  padding: 3rem 1rem;
+  grid-column: 1 / -1;
+  border-radius: 0;
   text-align: center;
 }
-.emptyIcon {
-  display: grid;
-  width: 2rem;
-  height: 2rem;
-  place-items: center;
-  border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
-  color: var(--color-muted);
-}
 .empty h3 {
-  margin: 1rem 0 0.375rem;
-  font-size: 0.875rem;
+  margin: 0 0 0.375rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.8125rem;
+  font-weight: 500;
 }
 .empty p {
   margin: 0;
   color: var(--color-muted);
-  font-size: 0.8125rem;
-}
-.footer {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 3rem;
-  color: var(--color-subtle);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
 }
 
-@media (max-width: 1050px) {
-  .projectGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .topbarCenter {
-    display: none;
-  }
-}
-
-@media (max-width: 700px) {
-  .sidebar {
-    width: 3.75rem;
-    align-items: center;
-    padding: 0.625rem 0.375rem;
-  }
-  .workspace {
-    justify-content: center;
-    padding: 0;
-  }
-  .workspaceName,
-  .teamBadge,
-  .chevron,
-  .find,
-  .sidebarBottom {
-    display: none;
-  }
-  .navigation {
-    width: 100%;
-    margin-top: 1rem;
-  }
-  .mainColumn {
-    width: calc(100% - 3.75rem);
-    margin-left: 3.75rem;
-  }
-  .topbar {
-    height: 3.25rem;
-    padding: 0 1rem;
-  }
-  .content {
-    padding: 2rem 1rem 1.5rem;
+@media (max-width: 850px) {
+  .grid {
+    grid-template-columns: 1fr;
   }
   .headingRow {
     align-items: flex-start;
+    flex-direction: column;
   }
-  .headingRow h1 {
-    font-size: 1.5rem;
+}
+
+@media (max-width: 620px) {
+  .sidebar {
+    width: 3.5rem;
   }
-  .newButton {
-    flex-shrink: 0;
+  .brandRow {
+    justify-content: center;
+    padding: 0;
+  }
+  .brandName,
+  .sideLabel,
+  .nav :global(a > span[class*='label']),
+  .sideStatus {
+    display: none;
+  }
+  .nav {
+    padding: 0 0.375rem;
+  }
+  .mainColumn {
+    width: calc(100% - 3.5rem);
+    margin-left: 3.5rem;
+  }
+  .shell::before {
+    left: 3.5rem;
+  }
+  .topbar {
+    height: 3.5rem;
+    padding: 0 0.75rem;
+  }
+  .content {
+    padding: 2rem 0.875rem 1.5rem;
   }
   .toolbar {
+    align-items: stretch;
     flex-wrap: wrap;
+    gap: 0.625rem;
   }
   .search {
     flex-basis: 100%;
-  }
-  .projectGrid {
-    grid-template-columns: 1fr;
   }
 }
 </style>

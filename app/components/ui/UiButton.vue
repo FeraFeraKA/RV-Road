@@ -40,7 +40,7 @@ withDefaults(
 }
 
 .button:focus-visible {
-  outline: 2px solid var(--color-primary, #556b45);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
 }
 
@@ -50,12 +50,12 @@ withDefaults(
 }
 
 .primary {
-  color: var(--color-on-primary, #fff);
-  background: var(--color-primary);
+  color: var(--color-on-accent, #07130e);
+  background: var(--color-accent);
 }
 
 .primary:hover:not(:disabled) {
-  background: var(--color-primary-hover);
+  background: var(--color-accent-strong);
 }
 
 .secondary {

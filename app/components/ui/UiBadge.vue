@@ -46,8 +46,8 @@ withDefaults(
   background: #241010;
 }
 .info {
-  color: #6bb8ff;
-  border-color: #1b3d5b;
-  background: #0c1924;
+  color: var(--color-accent);
+  border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+  background: var(--color-accent-soft);
 }
 </style>

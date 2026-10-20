@@ -1,3 +1,5 @@
+@import '@vue-flow/core/dist/style.css';
+
 :root {
   color-scheme: dark;
   font-family:
@@ -25,9 +27,26 @@
   --color-primary: #ededed;
   --color-primary-hover: #d4d4d4;
   --color-on-primary: #090909;
-  --color-accent: #0070f3;
+  --color-accent: #42b883;
+  --color-accent-strong: #35a372;
+  --color-accent-soft: #13271e;
+  --color-on-accent: #07130e;
   --radius-control: 0.5rem;
   --radius-card: 0.625rem;
+}
+
+[data-framework='vue'] {
+  --color-accent: #42b883;
+  --color-accent-strong: #35a372;
+  --color-accent-soft: #13271e;
+  --color-on-accent: #07130e;
+}
+
+[data-framework='react'] {
+  --color-accent: #61dafb;
+  --color-accent-strong: #38c8f0;
+  --color-accent-soft: #10242a;
+  --color-on-accent: #071116;
 }
 
 *,
@@ -60,5 +79,20 @@ a {
 
 ::selection {
   color: #fff;
-  background: #0070f3;
+  background: var(--color-accent);
+}
+
+.vue-flow__edge-path {
+  stroke: var(--color-accent);
+}
+
+.roadmap-flow-edge-animated .vue-flow__edge-path {
+  stroke-dasharray: 6 4;
+  animation: roadmap-flow-dash 0.7s linear infinite;
+}
+
+@keyframes roadmap-flow-dash {
+  to {
+    stroke-dashoffset: -10;
+  }
 }
