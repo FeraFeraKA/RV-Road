@@ -5,12 +5,10 @@ export type TFramework = 'react' | 'vue';
 export type TTopicStatus = 'not done' | 'done';
 export type TPublicationStatus = 'draft' | 'published';
 
-export type TLocalizedText = Record<TLocale, string>;
-
 interface IBaseInfo {
   id: string;
-  title: TLocalizedText;
-  description: TLocalizedText;
+  titleKey: string;
+  descriptionKey: string;
 }
 
 interface IGraphInfo {
@@ -31,13 +29,13 @@ export interface ITopic extends IBaseInfo {
   // User progress; consumers must scope topic instances to the user session.
   status: TTopicStatus;
   publicationStatus: TPublicationStatus;
-  // Drafts may have no material; published content must be validated before use.
-  material?: TLocalizedText;
+  // Drafts may have no material key; published translations must be validated before use.
+  materialKey?: string;
   resources: IResource[];
 }
 
 export interface IResource {
-  title: TLocalizedText;
+  titleKey: string;
   icon?: string;
   url: string;
 }

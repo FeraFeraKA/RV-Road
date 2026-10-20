@@ -28,7 +28,7 @@ package.json                   # Dependencies and executable commands
 
 The map describes responsibilities, not temporary build files. Inspect the repository for its latest state; do not restore unrelated deleted files to match documentation.
 
-Domain contracts use lowercase locale/framework values and RU/EN text records. Roadmaps own section placements/connections; sections own topic placements/connections. Shared topics keep stable IDs without owning a single graph position. Topic `publicationStatus` describes content availability, while `status` describes session-specific completion (`not done` / `done`). Published material requires validation before rendering; runtime content validation and progress persistence are not implemented.
+Domain contracts use lowercase locale/framework values and string translation keys: `titleKey`, `descriptionKey`, and optional `materialKey`; resource labels use `titleKey`. Consumers will resolve these keys against the active locale. Dictionary coverage and large lesson storage remain future work. Roadmaps own section placements/connections; sections own topic placements/connections. Shared topics keep stable IDs without owning a single graph position. Topic `publicationStatus` describes content availability, while `status` describes session-specific completion (`not done` / `done`). Published material translations require validation before rendering; runtime content validation and progress persistence are not implemented.
 
 ## Proposed structure
 
