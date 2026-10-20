@@ -1,23 +1,22 @@
 <script setup lang="ts">
-withDefaults(defineProps<{
-  variant?: 'primary' | 'secondary' | 'ghost'
-  size?: 'sm' | 'md' | 'lg'
-  type?: 'button' | 'submit' | 'reset'
-  disabled?: boolean
-}>(), {
-  variant: 'primary',
-  size: 'md',
-  type: 'button',
-  disabled: false,
-})
+withDefaults(
+  defineProps<{
+    variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
+    size?: 'sm' | 'md' | 'lg';
+    type?: 'button' | 'submit' | 'reset';
+    disabled?: boolean;
+  }>(),
+  {
+    variant: 'primary',
+    size: 'md',
+    type: 'button',
+    disabled: false,
+  },
+);
 </script>
 
 <template>
-  <button
-    :class="[$style.button, $style[variant], $style[size]]"
-    :type="type"
-    :disabled="disabled"
-  >
+  <button :class="[$style.button, $style[variant], $style[size]]" :type="type" :disabled="disabled">
     <slot />
   </button>
 </template>
@@ -34,7 +33,10 @@ withDefaults(defineProps<{
   font-weight: 600;
   line-height: 1.25;
   cursor: pointer;
-  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease,
+    color 150ms ease;
 }
 
 .button:focus-visible {
@@ -49,33 +51,54 @@ withDefaults(defineProps<{
 
 .primary {
   color: var(--color-on-primary, #fff);
-  background: var(--color-primary, #556b45);
+  background: var(--color-primary);
 }
 
 .primary:hover:not(:disabled) {
-  background: var(--color-primary-hover, #465a38);
+  background: var(--color-primary-hover);
 }
 
 .secondary {
-  color: var(--color-text, #25261f);
-  border-color: var(--color-border, #d9d9d2);
-  background: var(--color-surface, #fff);
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+  background: var(--color-surface-raised);
 }
 
 .secondary:hover:not(:disabled) {
-  background: var(--color-surface-hover, #f5f5f1);
+  background: var(--color-surface-hover);
 }
 
 .ghost {
-  color: var(--color-text, #25261f);
+  color: var(--color-text);
   background: transparent;
 }
 
 .ghost:hover:not(:disabled) {
-  background: var(--color-surface-hover, #f5f5f1);
+  background: var(--color-surface-hover);
 }
 
-.sm { min-height: 2rem; padding: 0.375rem 0.625rem; font-size: 0.875rem; }
-.md { min-height: 2.5rem; padding: 0.5625rem 0.875rem; font-size: 0.9375rem; }
-.lg { min-height: 3rem; padding: 0.75rem 1.125rem; font-size: 1rem; }
+.danger {
+  color: #fff;
+  background: #d92d20;
+}
+
+.danger:hover:not(:disabled) {
+  background: #b42318;
+}
+
+.sm {
+  min-height: 2rem;
+  padding: 0.375rem 0.625rem;
+  font-size: 0.875rem;
+}
+.md {
+  min-height: 2.5rem;
+  padding: 0.5625rem 0.875rem;
+  font-size: 0.9375rem;
+}
+.lg {
+  min-height: 3rem;
+  padding: 0.75rem 1.125rem;
+  font-size: 1rem;
+}
 </style>
