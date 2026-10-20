@@ -6,7 +6,7 @@ The application uses Nuxt 4, Vue 3, TypeScript, Vue Flow, and `@nuxtjs/i18n`. Pi
 
 ```text
 app/
-|-- app.vue                     # Document language, route announcer and NuxtPage
+|-- app.vue                     # Route announcer and NuxtPage
 |-- pages/
 |   `-- index.vue               # Demo project-plan list, not the learning roadmap
 |-- components/
@@ -27,8 +27,6 @@ package.json                   # Dependencies and executable commands
 ```
 
 The map describes responsibilities, not temporary build files. Inspect the repository for its latest state; do not restore unrelated deleted files to match documentation.
-
-Nuxt i18n generates `/ru` and `/en` routes with the `prefix` strategy. `/` redirects to `/ru`; browser/cookie language detection is disabled so URL locale is authoritative. The demo interface, metadata, internal navigation, and language link use the module. Demo plan names, statuses, and update labels remain Russian fixtures. Learning models and lesson content are outside this integration.
 
 ## Proposed structure
 
@@ -75,3 +73,7 @@ Graph selection, viewport, and view preference are presentation state, separate 
 ## Maintenance
 
 Update the map when responsibilities move or a proposed layer becomes implemented. Do not inventory every small component. Record significant accepted choices in `decisions.md`.
+
+## Locale routing
+
+Nuxt i18n generates `/ru` and `/en` routes with the `prefix` strategy. `/` redirects to `/ru`; browser/cookie language detection is disabled so URL locale is authoritative. The demo interface, metadata, internal navigation, and language link use the module. `app.vue` sets the document language. Demo plan names, statuses, and update labels remain Russian fixtures. Learning models and lesson content are outside this integration.
