@@ -1,51 +1,54 @@
-// TODO(learn: 01-learning-models): Turn these names into TypeScript models.
 // Task: https://trello.com/c/FJS0bI5h
-// Commented outlines keep the app runnable until you choose the types.
 
-// Locale
-// Framework
-// PublicationStatus
+export type TLocale = 'ru' | 'en';
+export type TFramework = 'react' | 'vue';
+export type TTopicStatus = 'not done' | 'done';
+export type TPublicationStatus = 'draft' | 'published';
 
-// LocalizedText
-//   ru
-//   en
+export type TLocalizedText = Record<TLocale, string>;
 
-// Roadmap
-//   id
-//   framework
-//   title
-//   description
-//   sectionIds
-//   sectionPlacements
-//   sectionConnections
+interface IBaseInfo {
+  id: string;
+  title: TLocalizedText;
+  description: TLocalizedText;
+}
 
-// Section
-//   id
-//   title
-//   description
-//   topicIds
-//   topicPlacements
-//   topicConnections
+interface IGraphInfo {
+  placements: IGraphPlacement[];
+  connections: IGraphConnection[];
+}
 
-// Topic
-//   id
-//   status
-//   title
-//   description
-//   material
-//   resources
+export interface IRoadmap extends IBaseInfo, IGraphInfo {
+  framework: TFramework;
+  sectionIds: string[];
+}
 
-// Resource
-//   title
-//   url
+export interface ISection extends IBaseInfo, IGraphInfo {
+  topicIds: string[];
+}
 
-// GraphPlacement
-//   entityId
-//   x
-//   y
+export interface ITopic extends IBaseInfo {
+  // User progress; consumers must scope topic instances to the user session.
+  status: TTopicStatus;
+  publicationStatus: TPublicationStatus;
+  // Drafts may have no material; published content must be validated before use.
+  material?: TLocalizedText;
+  resources: IResource[];
+}
 
-// GraphConnection
-//   sourceId
-//   targetId
+export interface IResource {
+  title: TLocalizedText;
+  icon?: string;
+  url: string;
+}
 
-export {};
+export interface IGraphPlacement {
+  entityId: string;
+  x: number;
+  y: number;
+}
+
+export interface IGraphConnection {
+  sourceId: string;
+  targetId: string;
+}

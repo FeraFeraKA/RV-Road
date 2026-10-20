@@ -7,7 +7,7 @@ The application uses Nuxt 4, Vue 3, TypeScript, and Vue Flow. Pinia, a Markdown 
 ```text
 app/
 |-- app.vue                     # Route announcer and NuxtPage
-|-- types/roadmap.ts            # Empty learning entry point; domain models not implemented
+|-- types/roadmap.ts            # Domain contracts; not yet consumed by the demo
 |-- pages/
 |   `-- index.vue               # Demo project-plan list, not the learning roadmap
 |-- components/
@@ -27,6 +27,8 @@ package.json                   # Dependencies and executable commands
 ```
 
 The map describes responsibilities, not temporary build files. Inspect the repository for its latest state; do not restore unrelated deleted files to match documentation.
+
+Domain contracts use lowercase locale/framework values and RU/EN text records. Roadmaps own section placements/connections; sections own topic placements/connections. Shared topics keep stable IDs without owning a single graph position. Topic `publicationStatus` describes content availability, while `status` describes session-specific completion (`not done` / `done`). Published material requires validation before rendering; runtime content validation and progress persistence are not implemented.
 
 ## Proposed structure
 
@@ -62,7 +64,7 @@ The page hierarchy must support `product.md`. Agree on domain field names in the
 1. A page validates route context and selects a path, section, or topic.
 2. Domain data supplies the same entities to the list and graph.
 3. A graph adapter converts relationships into Vue Flow nodes/edges. Presentation emits intent such as topic selection.
-4. Progress records completed topic IDs. Derived values supply section/path counts; locale is not part of a completion ID.
+4. Planned progress state records completed topic IDs and supplies topic completion status. Derived values supply section/path counts; locale is not part of a completion ID. Topic instances containing user status must be scoped to the session, rather than mutated in shared server data.
 5. Session persistence sits behind the progress interface, rather than duplicated storage access in components.
 6. A lesson view renders localized content, examples, and resource links.
 
