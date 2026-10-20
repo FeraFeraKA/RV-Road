@@ -23,7 +23,7 @@ Before a development task, read this file, `docs/learning-workflow.md`, `docs/ar
 - Both developers must implement core Vue concepts themselves. Reviewing another developer's implementation does not replace independent practice.
 - Use the coverage guide and task briefs in `docs/learning-workflow.md`. Do not promise mastery of all Vue in seven days.
 - Introduce Pinia after a small composable-based shared-state exercise. Pinia is planned, not currently installed. Do not add it during unrelated tasks or documentation work.
-- Trello cards are provisional planning inputs. For authorized new work outside the current task's scope, create a separate `task/<task-id>-<short-name>` branch and a short Trello card on the project board before implementation. Check for an existing card first and reuse it when it already covers the work. Include the intended result and branch name, then add the PR link when available. This standing authorization covers card creation for such work; it does not authorize inventing unrelated work or rewriting, moving, assigning, or completing other cards without a human request.
+- Trello cards are provisional planning inputs. For authorized new product work outside the current task's scope, create a separate `task/<task-id>-<short-name>` branch and a short Trello card on the project board before implementation. Check for an existing card first and reuse it when it already covers the work. Include the intended result and branch name, then add the PR link when available. This standing authorization covers card creation for such work; it does not authorize inventing unrelated work or rewriting, moving, assigning, or completing other cards without a human request.
 - Distinguish a prepared scaffold from an implemented, reviewed feature. Do not mark unfinished learning work complete.
 - Preserve other developers' work and unrelated local changes.
 
@@ -38,6 +38,7 @@ Before a development task, read this file, `docs/learning-workflow.md`, `docs/ar
 
 ## Checks, commits, and handoff
 
+- Workflow-only infrastructure and agent changes (for example agent instructions, development conventions, formatting tools, and CI configuration) may be committed and pushed directly to `main` without a separate task branch or PR. This exception applies only to changes governing development, not application behavior or product infrastructure such as i18n, routing, or storage. Preserve unrelated work and run the relevant checks normally.
 - Verify the edit at the appropriate level: formatting/links for documentation, available build and relevant behavior checks for code/scaffolds.
 - A scaffold's checks should pass for its stated contract. List unfinished feature criteria explicitly; do not hide failures or present placeholder output as completion.
 - After each implementation or scaffold delivery, make a Conventional Commit and run `git push`. This includes documentation changes. Stage only task-owned files.

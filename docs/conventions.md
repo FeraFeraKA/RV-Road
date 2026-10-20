@@ -32,7 +32,7 @@ Read `package.json` first. Current scripts: `build`, `dev`, `generate`, `preview
 
 ## Git and documentation
 
-- When creating a branch for agent work, use `codex/`; do not switch another developer's branch without a reason.
+- Use a separate `task/<task-id>-<short-name>` branch for each product task. Keep follow-up fixes on the same branch. Workflow-only infrastructure and agent changes may go directly to `main`, as defined in `AGENTS.md`; do not switch another developer's branch without a reason.
 - Stage only task-owned files and preserve unrelated changes.
 - Make a Conventional Commit and push after implementation, including scaffold/documentation delivery. Report problems; do not force-push or silently rewrite history.
 - Documentation, learning briefs, and instructional TODOs are English. Human conversation may be Russian.
