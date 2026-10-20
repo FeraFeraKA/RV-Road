@@ -189,12 +189,12 @@ const visiblePlans = computed(() => {
   border-radius: 0.1875rem;
   color: var(--color-on-accent);
   background: var(--color-accent);
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs);
   font-weight: 800;
 }
 .brandName {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs);
   font-weight: 700;
   letter-spacing: 0.035em;
 }
@@ -202,7 +202,7 @@ const visiblePlans = computed(() => {
   margin: 1.25rem 1rem 0.625rem;
   color: var(--color-subtle);
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.5625rem;
+  font-size: var(--font-size-caption);
   letter-spacing: 0.1em;
 }
 .nav {
@@ -213,7 +213,7 @@ const visiblePlans = computed(() => {
 .nav :global(a) {
   border-radius: 0;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs);
 }
 .nav :global(a[class*='active']) {
   color: var(--color-accent);
@@ -226,7 +226,7 @@ const visiblePlans = computed(() => {
   padding: 1rem;
   border-top: 1px solid var(--color-border);
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.5625rem;
+  font-size: var(--font-size-caption);
   letter-spacing: 0.04em;
 }
 .connected {
@@ -267,7 +267,7 @@ const visiblePlans = computed(() => {
   gap: 0.5rem;
   color: var(--color-subtle);
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.5625rem;
+  font-size: var(--font-size-caption);
   letter-spacing: 0.06em;
 }
 .content {
@@ -279,6 +279,7 @@ const visiblePlans = computed(() => {
 }
 .headingRow {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
   gap: 1.25rem;
@@ -289,13 +290,13 @@ const visiblePlans = computed(() => {
   margin: 0 0 0.75rem;
   color: var(--color-accent);
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.625rem;
+  font-size: var(--font-size-label);
   letter-spacing: 0.12em;
 }
 .headingRow h1 {
   margin: 0;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: var(--font-size-heading);
   font-weight: 500;
   letter-spacing: -0.045em;
 }
@@ -304,11 +305,12 @@ const visiblePlans = computed(() => {
   margin: 0.625rem 0 0;
   color: var(--color-muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs);
   line-height: 1.6;
 }
 .toolbar {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
   margin: 1.25rem 0 1.5rem;
@@ -319,7 +321,7 @@ const visiblePlans = computed(() => {
   align-items: center;
   gap: 0.625rem;
   min-width: 0;
-  height: 2.5rem;
+  min-height: var(--control-height-md);
   padding: 0 0.75rem;
   border: 1px solid var(--color-border-strong);
   background: #090909;
@@ -330,7 +332,7 @@ const visiblePlans = computed(() => {
   border: 1px solid var(--color-border);
   color: var(--color-subtle);
   font: inherit;
-  font-size: 0.6875rem;
+  font-size: var(--font-size-key);
 }
 .sectionHeader {
   display: flex;
@@ -341,13 +343,13 @@ const visiblePlans = computed(() => {
 .sectionHeader h2 {
   margin: 0;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs);
   font-weight: 500;
 }
 .sectionHeader > span {
   color: var(--color-subtle);
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.5625rem;
+  font-size: var(--font-size-caption);
   letter-spacing: 0.06em;
 }
 .grid {
@@ -381,7 +383,7 @@ const visiblePlans = computed(() => {
   border: 1px solid var(--color-border-strong);
   color: var(--color-accent);
   background: #0a0a0a;
-  font-size: 1rem;
+  font-size: var(--font-size-lg);
 }
 .openArrow {
   margin-left: auto;
@@ -391,7 +393,7 @@ const visiblePlans = computed(() => {
   overflow: hidden;
   margin: 1.5rem 0 0.375rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.8125rem;
+  font-size: var(--font-size-sm);
   font-weight: 500;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -401,7 +403,7 @@ const visiblePlans = computed(() => {
   margin: 0;
   color: var(--color-subtle);
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.5625rem;
+  font-size: var(--font-size-caption);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -414,7 +416,7 @@ const visiblePlans = computed(() => {
   border-top: 1px solid var(--color-border);
   color: var(--color-muted);
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.5625rem;
+  font-size: var(--font-size-caption);
 }
 .cardMeta span {
   display: flex;
@@ -429,13 +431,13 @@ const visiblePlans = computed(() => {
 .empty h3 {
   margin: 0 0 0.375rem;
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 0.8125rem;
+  font-size: var(--font-size-sm);
   font-weight: 500;
 }
 .empty p {
   margin: 0;
   color: var(--color-muted);
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs);
 }
 
 @media (max-width: 850px) {

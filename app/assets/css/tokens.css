@@ -41,10 +41,20 @@
   --space-lg: calc(var(--ui-unit) * 16);
   --space-xl: calc(var(--ui-unit) * 24);
 
-  --font-size-xs: calc(var(--ui-unit) * 12);
-  --font-size-sm: calc(var(--ui-unit) * 13);
-  --font-size-md: calc(var(--ui-unit) * 14);
-  --font-size-lg: 1rem;
+  --text-scale: 1.5;
+  --text-unit: calc(var(--ui-unit) * var(--text-scale));
+  --font-size-caption: calc(var(--text-unit) * 9);
+  --font-size-label: calc(var(--text-unit) * 10);
+  --font-size-key: calc(var(--text-unit) * 11);
+  --font-size-xs: calc(var(--text-unit) * 12);
+  --font-size-sm: calc(var(--text-unit) * 13);
+  --font-size-md: calc(var(--text-unit) * 14);
+  --font-size-lg: calc(var(--text-unit) * 16);
+  --font-size-heading: clamp(
+    calc(var(--text-unit) * 24),
+    calc(2.5vw * var(--text-scale)),
+    calc(var(--text-unit) * 32)
+  );
 
   --control-height-sm: calc(var(--ui-unit) * 32);
   --control-height-md: calc(var(--ui-unit) * 40);
@@ -95,6 +105,7 @@ body,
 
 body {
   min-height: 100vh;
+  font-size: var(--font-size-lg);
 }
 
 button,
