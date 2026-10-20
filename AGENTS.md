@@ -23,7 +23,7 @@ Before a development task, read this file, `docs/learning-workflow.md`, `docs/ar
 - Both developers must implement core Vue concepts themselves. Reviewing another developer's implementation does not replace independent practice.
 - Use the coverage guide and task briefs in `docs/learning-workflow.md`. Do not promise mastery of all Vue in seven days.
 - Introduce Pinia after a small composable-based shared-state exercise. Pinia is planned, not currently installed. Do not add it during unrelated tasks or documentation work.
-- Trello cards are provisional planning inputs. Do not create, rewrite, move, assign, or complete cards unless the human requests that action.
+- Trello cards are provisional planning inputs. For authorized new work outside the current task's scope, create a separate `task/<task-id>-<short-name>` branch and a short Trello card on the project board before implementation. Check for an existing card first and reuse it when it already covers the work. Include the intended result and branch name, then add the PR link when available. This standing authorization covers card creation for such work; it does not authorize inventing unrelated work or rewriting, moving, assigning, or completing other cards without a human request.
 - Distinguish a prepared scaffold from an implemented, reviewed feature. Do not mark unfinished learning work complete.
 - Preserve other developers' work and unrelated local changes.
 
